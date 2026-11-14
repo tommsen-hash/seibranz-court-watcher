@@ -1,0 +1,19 @@
+
+{
+  "name": "Seibranz Court Watcher",
+  "short_name": "Seibranz Court",
+  "description": "Padel-Verfügbarkeitswächter für Seibranz",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0c141b",
+  "theme_color": "#101820",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
