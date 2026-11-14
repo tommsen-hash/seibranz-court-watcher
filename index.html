@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101820">
+<title>Seibranz Court Watcher</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0c141b;color:#f2f7f8;font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:24px 18px}
+header{display:flex;align-items:center;gap:12px;margin:15px 0 28px}
+.logo{background:#244239;color:#70ddb0;padding:13px;border-radius:15px;font-size:25px}
+h1{font-size:21px;margin:0}
+small,.muted{color:#9db0b8}
+.panel{background:#172731;border:1px solid #30434c;border-radius:20px;padding:20px;margin:16px 0}
+.hero{background:linear-gradient(140deg,#203b36,#152a30)}
+.time{font-size:38px;font-weight:800;margin:14px 0}
+h2{font-size:17px}
+.tag{color:#f3c66b;font-size:12px}
+label{display:block;color:#9db0b8;font-size:13px;margin:15px 0 6px}
+input,select{width:100%;padding:13px;background:#0c1820;border:1px solid #40535c;border-radius:11px;color:white;font-size:16px}
+button{width:100%;padding:15px;border:0;border-radius:12px;background:#70ddb0;color:#10251f;font-size:15px;font-weight:800;margin-top:18px}
+.result{padding:15px;background:#102029;border-radius:13px;color:#9db0b8;line-height:1.5}
+footer{text-align:center;color:#71868e;font-size:11px;margin:30px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">↗</div>
+<div><h1>COURT WATCHER</h1><small>SEIBRANZ EDITION</small></div>
+</header>
+
+<section class="panel hero">
+<small>DEIN SUCHPROFIL</small>
+<div class="time">18:00 – 21:00</div>
+<strong>Holzrebell-Arena · Seibranz</strong>
+<p class="muted">Padel · Alle Wochentage</p>
+</section>
+
+<section class="panel">
+<h2>Verfügbarkeit</h2>
+<div class="tag">● Datenquelle noch nicht verbunden</div>
+<div class="result" style="margin-top:15px">
+Noch keine Live-Daten verfügbar.<br>
+Sobald eine zulässige Datenquelle angebunden ist, erscheinen hier freie Plätze.
+</div>
+</section>
+
+<section class="panel">
+<h2>Suchprofil einstellen</h2>
+<label>Spielbeginn ab</label>
+<input id="start" type="time" value="18:00">
+<label>Spielende bis</label>
+<input id="end" type="time" value="21:00">
+<label>Spieldauer</label>
+<select id="duration">
+<option>60</option>
+<option selected>90</option>
+<option>120</option>
+</select>
+<label>Gewünschtes Prüfintervall</label>
+<select id="interval">
+<option selected>5</option>
+<option>15</option>
+<option>30</option>
+</select>
+<button onclick="save()">Einstellungen speichern</button>
+<p id="message" class="muted"></p>
+</section>
+
+<footer>SEIBRANZ COURT WATCHER · VERSION 0.1</footer>
+
+<script>
+function save(){
+const p={
+start:document.getElementById('start').value,
+end:document.getElementById('end').value,
+duration:document.getElementById('duration').value,
+interval:document.getElementById('interval').value
+};
+localStorage.setItem('seibranzProfile',JSON.stringify(p));
+document.getElementById('message').textContent='Einstellungen erfolgreich gespeichert!';
+}
+try{
+const p=JSON.parse(localStorage.getItem('seibranzProfile')||'{}');
+['start','end','duration','interval'].forEach(k=>{
+if(p[k])document.getElementById(k).value=p[k];
+});
+}catch(e){}
+</script>
+</body>
+</html>
