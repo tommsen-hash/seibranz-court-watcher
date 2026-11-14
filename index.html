@@ -59,6 +59,11 @@ Sobald eine zulässige Datenquelle angebunden ist, erscheinen hier freie Plätze
 <option selected>90</option>
 <option>120</option>
 </select>
+  <label>Courts berücksichtigen</label>
+<div>
+  <label><input type="checkbox" id="zollikofer" checked> Zollikofer Court (Indoor) – bevorzugt</label>
+  <label><input type="checkbox" id="halder" checked> Halder Court (Outdoor)</label>
+</div>
 <label>Gewünschtes Prüfintervall</label>
 <select id="interval">
 <option selected>5</option>
@@ -111,15 +116,21 @@ const p={
 start:document.getElementById('start').value,
 end:document.getElementById('end').value,
 duration:document.getElementById('duration').value,
-interval:document.getElementById('interval').value
+interval:document.getElementById('interval').value,
+zollikofer:document.getElementById('zollikofer').checked,
+halder:document.getElementById('halder').checked
 };
 localStorage.setItem('seibranzProfile',JSON.stringify(p));
 document.getElementById('message').textContent='Einstellungen erfolgreich gespeichert!';
 }
 try{
 const p=JSON.parse(localStorage.getItem('seibranzProfile')||'{}');
-['start','end','duration','interval'].forEach(k=>{
-if(p[k])document.getElementById(k).value=p[k];
+['start','end','duration','interval','zollikofer','halder'].forEach(k=>{
+if(p[k]!==undefined){
+if(k==='zollikofer'||k==='halder')document.getElementById(k).checked=p[k];
+else document.getElementById(k).value=p[k];
+}
+
 });
 }catch(e){}
 if ("serviceWorker" in navigator) {
