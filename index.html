@@ -70,7 +70,8 @@ Sobald eine zulässige Datenquelle angebunden ist, erscheinen hier freie Plätze
 <p id="pushMessage" class="muted"></p>
 </section>
 
-<footer>SEIBRANZ COURT WATCHER · VERSION 0.1</footer>
+<footer>SEIBRANZ COURT WATCHER · VERSION 0.1</footer>  
+  <script>
 async function enablePush() {
   const msg = document.getElementById('pushMessage');
 
@@ -105,7 +106,6 @@ async function enablePush() {
     msg.textContent = 'Fehler: ' + error.message;
   }
 }
-</script>
 function save(){
 const p={
 start:document.getElementById('start').value,
