@@ -88,6 +88,15 @@ const p=JSON.parse(localStorage.getItem('seibranzProfile')||'{}');
 if(p[k])document.getElementById(k).value=p[k];
 });
 }catch(e){}
-</script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      await navigator.serviceWorker.register("./sw.js");
+      console.log("Push-Dienst erfolgreich registriert");
+    } catch (error) {
+      console.error("Service Worker Fehler:", error);
+    }
+  });
+}</script>
 </body>
 </html>
