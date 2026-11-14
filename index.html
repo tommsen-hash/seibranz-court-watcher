@@ -71,39 +71,41 @@ Sobald eine zulässige Datenquelle angebunden ist, erscheinen hier freie Plätze
 </section>
 
 <footer>SEIBRANZ COURT WATCHER · VERSION 0.1</footer>
-async function enablePush(){
-  const msg=document.getElementById('pushMessage');
+async function enablePush() {
+  const msg = document.getElementById('pushMessage');
 
-  if(!('Notification' in window) ||
-     !('serviceWorker' in navigator)){
-    msg.textContent='Push wird nicht unterstützt.';
+  if (!('Notification' in window) ||
+      !('serviceWorker' in navigator)) {
+    msg.textContent = 'Push wird nicht unterstützt.';
     return;
   }
 
-  try{
-    const permission=await Notification.requestPermission();
+  try {
+    const permission = await Notification.requestPermission();
 
-    if(permission!=='granted'){
-      msg.textContent='Mitteilungen nicht erlaubt.';
+    if (permission !== 'granted') {
+      msg.textContent = 'Mitteilungen nicht erlaubt.';
       return;
     }
 
-    const registration=await navigator.serviceWorker.ready;
+    const registration = await navigator.serviceWorker.ready;
 
     await registration.showNotification(
       '🎾 Seibranz Court Watcher',
       {
-        body:'Push-Test erfolgreich! Benachrichtigungen funktionieren.',
-        vibrate:[200,100,200]
+        body: 'Push-Test erfolgreich! Benachrichtigungen funktionieren.',
+        icon: './icon.png',
+        badge: './icon.png',
+        vibrate: [200, 100, 200]
       }
     );
 
-    msg.textContent='Push-Test erfolgreich!';
-  }catch(error){
-    msg.textContent='Fehler: '+error.message;
+    msg.textContent = 'Push-Test erfolgreich!';
+  } catch (error) {
+    msg.textContent = 'Fehler: ' + error.message;
   }
 }
-<script>
+</script>
 function save(){
 const p={
 start:document.getElementById('start').value,
